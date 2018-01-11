@@ -1,5 +1,11 @@
 public class Measurements {
-    private Double airQualityIndex, pm25, pm10, pressure, humidity, temperature;
+    private Double
+            airQualityIndex,
+            pm25,
+            pm10,
+            pressure,
+            humidity,
+            temperature;
 
     public void printInfo() {
         printAqi();
