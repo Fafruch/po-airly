@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
@@ -30,8 +31,9 @@ public class UserInputHandler {
         try {
             parser.parseArgument(args);
             checkArgs();
-        } catch (InputException e) {
-            System.err.println(e.getMessage());
+        } catch (InputException | CmdLineException ex) {
+            System.err.println(ex.getMessage());
+            System.out.println();
             System.err.println("java Main [options...] arguments...");
             // print the list of available options
             parser.printUsage(System.err);
@@ -40,19 +42,6 @@ public class UserInputHandler {
 
             return;
         }
-
-        /*// TEST
-        if (history) {
-            System.out.println("--history flag is set");
-        } else {
-            System.out.println("--history flag is NOT set");
-        }
-        System.out.println("--latitude was " + latitude);
-        System.out.println("--longitude was " + longitude);
-        System.out.println("--sensor-id was " + sensorId);
-        System.out.println("--api-key was " + (apiKey.equals(Api.MY_KEY) ? "default and its value was " : "") + apiKey);
-        System.out.println();
-        // END_TEST*/
 
         Data data = getData();
 

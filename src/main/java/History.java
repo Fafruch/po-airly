@@ -6,9 +6,11 @@ public class History {
     @SerializedName("measurements")
     private Measurements measurements;
 
-    @Override
-    public String toString() {
-        return "Sensor information from: " + fromDateTime + " to: " + tillDateTime + "\n"
-                + measurements.toString() + "\n";
+    public void printInfo() {
+        System.out.println("Sensor information");
+        System.out.println("between: " + tillDateTime);
+        System.out.println("    and: " + fromDateTime);
+        System.out.println();
+        measurements.printInfo();
     }
 }
