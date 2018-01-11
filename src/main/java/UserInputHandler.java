@@ -16,7 +16,7 @@ public class UserInputHandler {
     private String sensorId;
 
     @Option(name = "--api-key", usage = "(optional) Provide your own apiKey")
-    private String apiKey = Api.MY_KEY;
+    private String apiKey = System.getenv("API_KEY");
 
     @Option(name = "--history", usage = "(optional) Get historical data (from 24 hours every hour)")
     private boolean history;

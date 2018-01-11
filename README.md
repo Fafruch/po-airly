@@ -7,8 +7,8 @@
 | --latitude | double | szerokość geograficzna dowolnego punktu na mapie dla którego chcemy sprawdzić pomiary, np. `19.89323` (wymaga podania argumentu `--longitude`) |
 | --longitude | double | długość geograficzna dowolnego punktu na mapie dla którego chcemy sprawdzić pomiary, np. `50.12345` (wymaga podania argumentu `--latitude`) |
 | --sensor-id | int | ID sensora dla którego chcemy sprawdzić pomiary, np. `159` |
-| --history | flaga | (opcjonalny) dodaje wskazania dla zeszłych 24 godzin (mierzonych co godzinę) |
-| --api-key | string | (opcjonalny) własny klucz API zastępujący domyślnie wbudowany, np. `9896440101254ed89898d66d3d42c1d3` |
+| --history | flaga | (opcjonalny) dodaje pomiary dla zeszłych 24 godzin (mierzonych co godzinę) |
+| --api-key | string | (opcjonalny) zapytania do serwera Airly użyją podanego klucza `API_KEY`, np. `9896440101254ed89898d66d3d42c1d3` (domyślnie wartość klucza pobierana jest ze zmiennej środowiskowej `API_KEY`) |
 
 <br>
 <br>
