@@ -32,6 +32,7 @@ public class UserInputHandler {
             checkArgs();
         } catch (InputException e) {
             System.err.println(e.getMessage());
+            System.out.println();
             System.err.println("java Main [options...] arguments...");
             // print the list of available options
             parser.printUsage(System.err);

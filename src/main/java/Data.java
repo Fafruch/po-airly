@@ -9,12 +9,12 @@ public class Data {
 
     public void printCurrentInfo () {
         System.out.println("Current sensor information: ");
-        System.out.println(measurements.toString());
+        measurements.printInfo();
     }
 
     public void printHistoryInfo () {
         for(History historyMeasure : history) {
-            System.out.println(historyMeasure.toString());
+            historyMeasure.printInfo();
         }
     }
 }
