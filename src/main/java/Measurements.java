@@ -2,6 +2,18 @@ public class Measurements {
     private Double airQualityIndex, pm25, pm10, pressure, humidity, temperature;
 
     public void printInfo() {
+        printAqi();
+        printPm25();
+        printPm10();
+        printPressure();
+        printHumidity();
+        printTemperature();
+
+        System.out.println();
+        System.out.println();
+    }
+
+    private void printAqi() {
         OutColor outColor = new OutColor();
 
         System.out.print("AQI:         ");
@@ -23,6 +35,10 @@ public class Measurements {
             System.out.println(Round.to(2, airQualityIndex));
             outColor.switchTo(Color.WHITE);
         }
+    }
+
+    private void printPm25() {
+        OutColor outColor = new OutColor();
 
         System.out.print("PM 2,5:      ");
         if (pm25 == null) {
@@ -44,7 +60,10 @@ public class Measurements {
 
             System.out.println(" μg/m^3");
         }
+    }
 
+    private void printPm10() {
+        OutColor outColor = new OutColor();
 
         System.out.print("PM 10:       ");
         if (pm10 == null) {
@@ -67,7 +86,10 @@ public class Measurements {
             System.out.println(" μg/m^3");
         }
         outColor.switchTo(Color.WHITE);
+    }
 
+    private void printPressure() {
+        OutColor outColor = new OutColor();
 
         System.out.print("Pressure:    ");
         if (pressure == null) {
@@ -77,6 +99,10 @@ public class Measurements {
         } else {
             System.out.println(Round.to(2, pressure / 100) + " hPa");
         }
+    }
+
+    private void printHumidity() {
+        OutColor outColor = new OutColor();
 
         System.out.print("Humidity:    ");
         if (humidity == null) {
@@ -86,6 +112,10 @@ public class Measurements {
         } else {
             System.out.println(Round.to(2, humidity) + " %");
         }
+    }
+
+    private void printTemperature() {
+        OutColor outColor = new OutColor();
 
         System.out.print("Temperature: ");
         if (temperature == null) {
@@ -95,7 +125,5 @@ public class Measurements {
         } else {
             System.out.println(Round.to(2, temperature) + "\u00b0" + "C");
         }
-
-        System.out.println();
     }
 }
