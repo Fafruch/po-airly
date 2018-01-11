@@ -12,8 +12,10 @@
 
 <br>
 <br>
+
 np. dla `--latitude=50.07918 --longitude=19.91983 --history` otrzymamy:
 
+<br>
 
 ```
 ------------------------------
