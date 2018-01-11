@@ -8,13 +8,18 @@ public class Data {
     private History[] history;
 
     public void printCurrentInfo () {
-        System.out.println("Current sensor information: ");
+        System.out.println("------------------------------");
+        System.out.println("| Current sensor information |");
+        System.out.println("------------------------------");
         measurements.printInfo();
     }
 
     public void printHistoryInfo () {
-        for(History historyMeasure : history) {
-            historyMeasure.printInfo();
+        System.out.println("---------------------------------");
+        System.out.println("| Historical sensor information |");
+        System.out.println("---------------------------------");
+        for(int i = history.length - 1; i >= 0; i--) {
+            history[i].printInfo();
         }
     }
 }
