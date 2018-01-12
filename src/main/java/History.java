@@ -14,9 +14,19 @@ public class History {
         System.out.println("Sensor information");
         System.out.println("between: " + tillDateTime);
         System.out.println("    and: " + fromDateTime);
+        printMeasurements();
         System.out.println();
+    }
+
+    private void printMeasurements() {
+        OutColor outColor = new OutColor();
+
         if(measurements != null) {
             measurements.printInfo();
+        } else {
+            outColor.switchTo(Color.GREY);
+            System.out.println("no data for this time range :(");
+            outColor.switchTo(Color.WHITE);
         }
     }
 }

@@ -24,20 +24,23 @@ public class UserInput {
         this.args = args;
     }
 
-    public void parse() {
+    public void parse() throws InputException {
         CmdLineParser parser = new CmdLineParser(this);
 
         try {
             parser.parseArgument(args);
             checkArgs();
-        } catch (InputException | CmdLineException ex) {
-            System.err.println(ex.getMessage());
+
+        } catch (CmdLineException ex) {
+            // it's being caught here because only here it's possible to get options usage that can't be get
+            // as String in this lib, it can only be printed
+            System.out.println(ex.getMessage());
             System.out.println();
-            System.err.println("java Main [options...] arguments...");
-            // print the list of available options
-            parser.printUsage(System.err);
-            System.err.println();
-            System.err.println("  Example: java Main --latitude=VAL --longitude=VAL --history --api-key=VAL");
+            System.out.println("java Main [options...] arguments...");
+            // print the list of available options (with usage)
+            parser.printUsage(System.out);
+            System.out.println();
+            System.out.println("  Example: java Main --latitude=VAL --longitude=VAL --history --api-key=VAL");
         }
     }
 
@@ -52,6 +55,22 @@ public class UserInput {
             throw new InputException("Please provide missing latitude argument, like '--latitude=50.07918'");
         } else if (latitude != null && longitude == null && sensorId == null) {
             throw new InputException("Please provide missing longitude argument, like '--longitude=19.91983'");
+        }
+
+        if(latitude != null && longitude != null) {
+            if(!latitude.matches("\\d{1,3}(.\\d+)?")) {
+                throw new InputException("Please provide valid latitude, '" + latitude + "' is not a correct input. You can use for example '--latitude=50.07918'.");
+            }
+
+            if(!longitude.matches("\\d{1,3}(.\\d+)?")) {
+                throw new InputException("Please provide valid longitude, '" + longitude + "' is not a correct input. You can use for example '--latitude=19.91983'.");
+            }
+        }
+
+        if(sensorId != null) {
+            if(!sensorId.matches("\\d+")) {
+                throw new InputException("Please provide valid sensor-id, '" + sensorId + "' is not a correct input. You can use for example '--sensor-id=185'.");
+            }
         }
     }
 }
