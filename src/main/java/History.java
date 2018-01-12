@@ -1,7 +1,11 @@
 import com.google.gson.annotations.SerializedName;
 
 public class History {
-    private String fromDateTime, tillDateTime;
+    @SerializedName("fromDateTime")
+    private String fromDateTime;
+
+    @SerializedName("tillDateTime")
+    private String tillDateTime;
 
     @SerializedName("measurements")
     private Measurements measurements;
@@ -11,6 +15,8 @@ public class History {
         System.out.println("between: " + tillDateTime);
         System.out.println("    and: " + fromDateTime);
         System.out.println();
-        measurements.printInfo();
+        if(measurements != null) {
+            measurements.printInfo();
+        }
     }
 }

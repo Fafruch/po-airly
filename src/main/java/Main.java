@@ -11,7 +11,8 @@ public class Main {
             Printer printer = new Printer(data, userInput.history);
             printer.printInfo();
         } catch (Exception ex) {
-            System.err.println(ex.getMessage());
+            System.err.println("ERROR: ");
+            System.err.println(ex);
         }
     }
 
