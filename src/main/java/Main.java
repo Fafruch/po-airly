@@ -44,11 +44,15 @@ public class Main {
 
         if (userInput.sensorId != null) {
             String sensorIdUrl = "https://airapi.airly.eu/v1/sensor/measurements?sensorId=" + userInput.sensorId;
-            data = gson.fromJson(requestHandler.get(sensorIdUrl, userInput.apiKey), Data.class);
+            String response = requestHandler.get(sensorIdUrl, userInput.apiKey);
+
+            data = gson.fromJson(response, Data.class);
 
         } else {
             String mapPointUrl = "https://airapi.airly.eu/v1/mapPoint/measurements?latitude=" + userInput.latitude + "&longitude=" + userInput.longitude;
-            data = gson.fromJson(requestHandler.get(mapPointUrl, userInput.apiKey), Data.class);
+            String response = requestHandler.get(mapPointUrl, userInput.apiKey);
+
+            data = gson.fromJson(response, Data.class);
         }
 
         return data;
