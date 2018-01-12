@@ -1,31 +1,30 @@
-import com.google.gson.Gson;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
-public class UserInputHandler {
+public class UserInput {
     private String[] args;
 
     @Option(name = "--latitude", usage = "Latitude of point on map. Pass together with longitude")
-    private String latitude;
+    public String latitude;
 
     @Option(name = "--longitude", usage = "Longitude of point on map. Pass together with latitude")
-    private String longitude;
+    public String longitude;
 
     @Option(name = "--sensor-id", usage = "Check data from particular sensor with provided ID")
-    private String sensorId;
+    public String sensorId;
 
     @Option(name = "--api-key", usage = "(optional) Provide your own apiKey")
-    private String apiKey = Api.MY_KEY;
+    public String apiKey = System.getenv("API_KEY");
 
     @Option(name = "--history", usage = "(optional) Get historical data (from 24 hours every hour)")
-    private boolean history;
+    public boolean history;
 
-    public UserInputHandler(String[] args) {
+    public UserInput(String[] args) {
         this.args = args;
     }
 
-    public void run() throws Exception {
+    public void parse() {
         CmdLineParser parser = new CmdLineParser(this);
 
         try {
@@ -39,14 +38,7 @@ public class UserInputHandler {
             parser.printUsage(System.err);
             System.err.println();
             System.err.println("  Example: java Main --latitude=VAL --longitude=VAL --history --api-key=VAL");
-
-            return;
         }
-
-        Data data = getData();
-
-        Printer printer = new Printer(data, history);
-        printer.printInfo();
     }
 
     private void checkArgs() throws InputException {
@@ -61,22 +53,5 @@ public class UserInputHandler {
         } else if (latitude != null && longitude == null && sensorId == null) {
             throw new InputException("Please provide missing longitude argument, like '--longitude=19.91983'");
         }
-    }
-
-    private Data getData() throws Exception {
-        RequestHandler requestHandler = new RequestHandler();
-        Gson gson = new Gson();
-        Data data;
-
-        if (sensorId != null) {
-            String sensorIdUrl = "https://airapi.airly.eu/v1/sensor/measurements?sensorId=" + sensorId;
-            data = gson.fromJson(requestHandler.get(sensorIdUrl, apiKey), Data.class);
-
-        } else {
-            String mapPointUrl = "https://airapi.airly.eu/v1/mapPoint/measurements?latitude=" + latitude + "&longitude=" + longitude;
-            data = gson.fromJson(requestHandler.get(mapPointUrl, apiKey), Data.class);
-        }
-
-        return data;
     }
 }
