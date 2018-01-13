@@ -8,7 +8,7 @@
 | --longitude | double | długość geograficzna dowolnego punktu na mapie dla którego chcemy sprawdzić pomiary, np. `50.12345` (wymaga podania argumentu `--latitude`) |
 | --sensor-id | int | ID sensora dla którego chcemy sprawdzić pomiary, np. `159` |
 | --history | flaga | (opcjonalny) dodaje pomiary dla zeszłych 24 godzin (mierzonych co godzinę) |
-| --api-key | string | (opcjonalny) zapytania do serwera Airly użyją podanego klucza `API_KEY`, np. `9896440101254ed89898d66d3d42c1d3` (domyślnie wartość klucza pobierana jest ze zmiennej środowiskowej `API_KEY`) |
+| --api-key | string | (opcjonalny) zapytania do serwera Airly będą używały podanego klucza `API_KEY`, np. `9896440101254ed89898d66d3d42c1d3` (domyślnie wartość klucza pobierana jest ze zmiennej środowiskowej `API_KEY`) |
 
 <br>
 <br>
@@ -18,42 +18,59 @@ np. dla `--latitude=50.07918 --longitude=19.91983 --history` otrzymamy:
 <br>
 
 ```
-------------------------------
-| Current sensor information |
-------------------------------
-AQI:         77.92
-PM 2,5:      62.69 μg/m^3
-PM 10:       107.82 μg/m^3
-Pressure:    1014.53 hPa
-Humidity:    87.94 %
-Temperature: 1.95°C
+----------------------------------
+|   Current sensor information   |
+----------------------------------
+             ______
+            /      \
+           /  ^  ^  \
+           \  \__/  /
+            \______/
+
+AQI:         44.34
+PM 2,5:      27.94 μg/m^3
+PM 10:       55.28 μg/m^3
+Pressure:    1028.21 hPa
+Humidity:    90.21 %
+Temperature: -0.07°C
 
 
----------------------------------
-| Historical sensor information |
----------------------------------
+-----------------------------------
+|  Historical sensor information  |
+-----------------------------------
 Sensor information
-between: 2018-01-10T16:59:59Z
-    and: 2018-01-10T16:00:00Z
+between: 2018-01-12T09:59:59Z
+    and: 2018-01-12T09:00:00Z
+             ______
+            /      \
+           /  o  o  \
+           \  .__.  /
+            \______/
 
-AQI:         75.17
-PM 2,5:      57.24 μg/m^3
-PM 10:       99.05 μg/m^3
-Pressure:    1014.74 hPa
-Humidity:    88.69 %
-Temperature: 2.43°C
+AQI:         51.01
+PM 2,5:      31.24 μg/m^3
+PM 10:       64.15 μg/m^3
+Pressure:    1028.04 hPa
+Humidity:    92.7 %
+Temperature: -0.16°C
+
 
 
 Sensor information
-between: 2018-01-10T15:59:59Z
-    and: 2018-01-10T15:00:00Z
+between: 2018-01-12T08:59:59Z
+    and: 2018-01-12T08:00:00Z
+             ______
+            /      \
+           /  o  o  \
+           \  .__.  /
+            \______/
 
-AQI:         68.79
-PM 2,5:      48.73 μg/m^3
-PM 10:       91.24 μg/m^3
-Pressure:    1014.95 hPa
-Humidity:    81.22 %
-Temperature: 2.93°C
+AQI:         50.42
+PM 2,5:      31.69 μg/m^3
+PM 10:       65.22 μg/m^3
+Pressure:    1027.45 hPa
+Humidity:    92.41 %
+Temperature: 0.26°C
 
 ...
 ```
