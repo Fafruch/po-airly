@@ -21,6 +21,7 @@ np. dla `--latitude=50.07918 --longitude=19.91983 --history` otrzymamy:
 ----------------------------------
 |   Current sensor information   |
 ----------------------------------
+
              ______
             /      \
            /  ^  ^  \
@@ -38,9 +39,12 @@ Temperature: -0.07°C
 -----------------------------------
 |  Historical sensor information  |
 -----------------------------------
+
+
 Sensor information
 between: 2018-01-12T09:59:59Z
     and: 2018-01-12T09:00:00Z
+    
              ______
             /      \
            /  o  o  \
@@ -56,9 +60,13 @@ Temperature: -0.16°C
 
 
 
+-----------------------------------
+
+
 Sensor information
 between: 2018-01-12T08:59:59Z
     and: 2018-01-12T08:00:00Z
+    
              ______
             /      \
            /  o  o  \
@@ -71,6 +79,10 @@ PM 10:       65.22 μg/m^3
 Pressure:    1027.45 hPa
 Humidity:    92.41 %
 Temperature: 0.26°C
+
+
+
+-----------------------------------
 
 ...
 ```
