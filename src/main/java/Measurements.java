@@ -38,11 +38,11 @@ public class Measurements {
         if (aqi == null) {
             fafbot.confused();
         } else {
-            if (aqi < 50) {
+            if (aqi < 30) {
                 fafbot.happy();
-            } else if (aqi < 100) {
+            } else if (aqi < 60) {
                 fafbot.satisfied();
-            } else if (aqi < 150) {
+            } else if (aqi < 100) {
                 fafbot.joyless();
             } else {
                 fafbot.dying();
@@ -59,11 +59,11 @@ public class Measurements {
             System.out.println("no data");
             outColor.switchTo(Color.WHITE);
         } else {
-            if (aqi < 50) {
+            if (aqi < 30) {
                 outColor.switchTo(Color.BLUE);
-            } else if (aqi < 100) {
+            } else if (aqi < 60) {
                 outColor.switchTo(Color.GREEN);
-            } else if (aqi < 150) {
+            } else if (aqi < 100) {
                 outColor.switchTo(Color.YELLOW);
             } else {
                 outColor.switchTo(Color.RED);
