@@ -19,11 +19,8 @@ public class History {
 
     public void printInfo() throws ParseException {
         System.out.println("-----------------------------------");
-        System.out.println();
-        System.out.println();
-        System.out.println("Sensor information");
-        System.out.println("between:                   " + getFormattedTimeFor(tillDateTime));
-        System.out.println("    and:                   " + getFormattedTimeFor(fromDateTime));
+        System.out.println("|         " + getFormattedTimeFor(tillDateTime) + " - " + getFormattedTimeFor(fromDateTime) + "           |");
+        System.out.println("-----------------------------------");
         System.out.println();
         printMeasurements();
         System.out.println();
@@ -51,10 +48,9 @@ public class History {
         calendar.setTime(date);
 
         return String.format(
-                "%02d:%02d:%02d",
+                "%02d:%02d",
                 calendar.get(Calendar.HOUR_OF_DAY),
-                calendar.get(Calendar.MINUTE),
-                calendar.get(Calendar.SECOND)
+                calendar.get(Calendar.MINUTE)
         );
     }
 }
