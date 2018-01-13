@@ -88,4 +88,4 @@ Temperature: 0.26°C
 ...
 ```
 
-(tylko w kolorkach)
+(i to w kolorkach)
