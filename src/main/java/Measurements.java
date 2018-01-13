@@ -20,6 +20,7 @@ public class Measurements {
     private Double temperature;
 
     public void printInfo() {
+        printFafbot();
         printAqi();
         printPm25();
         printPm10();
@@ -29,6 +30,24 @@ public class Measurements {
 
         System.out.println();
         System.out.println();
+    }
+
+    private void printFafbot() {
+        Fafbot fafbot = new Fafbot();
+
+        if (aqi == null) {
+            fafbot.confused();
+        } else {
+            if (aqi < 50) {
+                fafbot.happy();
+            } else if (aqi < 100) {
+                fafbot.satisfied();
+            } else if (aqi < 150) {
+                fafbot.joyless();
+            } else {
+                fafbot.dying();
+            }
+        }
     }
 
     private void printAqi() {
@@ -65,9 +84,11 @@ public class Measurements {
             outColor.switchTo(Color.WHITE);
 
         } else {
-            if (pm25 < 25) {
+            if (pm25 < 15) {
+                outColor.switchTo(Color.BLUE);
+            } else if (pm25 < 40) {
                 outColor.switchTo(Color.GREEN);
-            } else if (pm25 < 100) {
+            } else if (pm25 < 90) {
                 outColor.switchTo(Color.YELLOW);
             } else {
                 outColor.switchTo(Color.RED);
@@ -90,9 +111,11 @@ public class Measurements {
             outColor.switchTo(Color.WHITE);
 
         } else {
-            if (pm10 < 50) {
+            if (pm10 < 30) {
+                outColor.switchTo(Color.BLUE);
+            } else if (pm10 < 60) {
                 outColor.switchTo(Color.GREEN);
-            } else if (pm10 < 200) {
+            } else if (pm10 < 150) {
                 outColor.switchTo(Color.YELLOW);
             } else {
                 outColor.switchTo(Color.RED);
