@@ -42,8 +42,8 @@ Temperature: -0.07°C
 
 
 Sensor information
-between: 2018-01-12T09:59:59Z
-    and: 2018-01-12T09:00:00Z
+between:       2018-01-12T09:59:59Z
+    and:       2018-01-12T09:00:00Z
     
              ______
             /      \
@@ -64,8 +64,8 @@ Temperature: -0.16°C
 
 
 Sensor information
-between: 2018-01-12T08:59:59Z
-    and: 2018-01-12T08:00:00Z
+between:       2018-01-12T08:59:59Z
+    and:       2018-01-12T08:00:00Z
     
              ______
             /      \
@@ -84,5 +84,8 @@ Temperature: 0.26°C
 
 -----------------------------------
 
+
 ...
 ```
+
+(tylko w kolorkach)
