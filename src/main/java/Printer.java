@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 public class Printer {
     private Data data;
     private boolean history;
@@ -7,7 +9,7 @@ public class Printer {
         this.history = history;
     }
 
-    public void printInfo() {
+    public void printInfo() throws ParseException {
         data.printCurrentInfo();
 
         if(history) {

@@ -1,5 +1,7 @@
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+
 public class Data {
     @SerializedName("currentMeasurements")
     private Measurements measurements;
@@ -15,7 +17,7 @@ public class Data {
         printMeasurements();
     }
 
-    public void printHistoryInfo() {
+    public void printHistoryInfo() throws ParseException {
         System.out.println("-----------------------------------");
         System.out.println("|  Historical sensor information  |");
 

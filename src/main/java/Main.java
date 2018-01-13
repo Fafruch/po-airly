@@ -3,6 +3,7 @@ import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.text.ParseException;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -14,7 +15,7 @@ public class Main {
 
             Printer printer = new Printer(data, userInput.history);
             printer.printInfo();
-        } catch (JsonSyntaxException ex) {
+        } catch (JsonSyntaxException | ParseException ex) {
             System.out.println("Received illegal response from Airly server. Please try again.");
         } catch (UnknownHostException ex) {
             System.out.println("Could not connect with Airly server. Please check your connection.");
