@@ -2,7 +2,7 @@ public class OutColor {
     private final String redSwitch = (char)27 + "[31m";
     private final String greenSwitch = (char)27 + "[32m";
     private final String yellowSwitch = (char)27 + "[33m";
-    private final String blueSwitch = (char)27 + "[33m";
+    private final String blueSwitch = (char)27 + "[34m";
     private final String greySwitch = (char)27 + "[37m";
     private final String whiteSwitch = (char)27 + "[38m";
 

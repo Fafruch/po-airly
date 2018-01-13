@@ -1,13 +1,26 @@
+import com.google.gson.annotations.SerializedName;
+
 public class Measurements {
-    private Double
-            airQualityIndex,
-            pm25,
-            pm10,
-            pressure,
-            humidity,
-            temperature;
+    @SerializedName("airQualityIndex")
+    private Double aqi;
+
+    @SerializedName("pm25")
+    private Double pm25;
+
+    @SerializedName("pm10")
+    private Double pm10;
+
+    @SerializedName("pressure")
+    private Double pressure;
+
+    @SerializedName("humidity")
+    private Double humidity;
+
+    @SerializedName("temperature")
+    private Double temperature;
 
     public void printInfo() {
+        printFafbot();
         printAqi();
         printPm25();
         printPm10();
@@ -19,26 +32,44 @@ public class Measurements {
         System.out.println();
     }
 
+    private void printFafbot() {
+        Fafbot fafbot = new Fafbot();
+
+        if (aqi == null) {
+            fafbot.confused();
+        } else {
+            if (aqi < 30) {
+                fafbot.happy();
+            } else if (aqi < 60) {
+                fafbot.satisfied();
+            } else if (aqi < 100) {
+                fafbot.joyless();
+            } else {
+                fafbot.dying();
+            }
+        }
+    }
+
     private void printAqi() {
         OutColor outColor = new OutColor();
 
         System.out.print("AQI:         ");
-        if (airQualityIndex == null) {
+        if (aqi == null) {
             outColor.switchTo(Color.GREY);
             System.out.println("no data");
             outColor.switchTo(Color.WHITE);
         } else {
-            if (airQualityIndex < 50) {
+            if (aqi < 30) {
                 outColor.switchTo(Color.BLUE);
-            } else if (airQualityIndex < 100) {
+            } else if (aqi < 60) {
                 outColor.switchTo(Color.GREEN);
-            } else if (airQualityIndex < 150) {
+            } else if (aqi < 100) {
                 outColor.switchTo(Color.YELLOW);
             } else {
                 outColor.switchTo(Color.RED);
             }
 
-            System.out.println(Round.to(2, airQualityIndex));
+            System.out.println(Round.to(2, aqi));
             outColor.switchTo(Color.WHITE);
         }
     }
@@ -53,9 +84,11 @@ public class Measurements {
             outColor.switchTo(Color.WHITE);
 
         } else {
-            if (pm25 < 25) {
+            if (pm25 < 15) {
+                outColor.switchTo(Color.BLUE);
+            } else if (pm25 < 40) {
                 outColor.switchTo(Color.GREEN);
-            } else if (pm25 < 100) {
+            } else if (pm25 < 90) {
                 outColor.switchTo(Color.YELLOW);
             } else {
                 outColor.switchTo(Color.RED);
@@ -78,9 +111,11 @@ public class Measurements {
             outColor.switchTo(Color.WHITE);
 
         } else {
-            if (pm10 < 50) {
+            if (pm10 < 30) {
+                outColor.switchTo(Color.BLUE);
+            } else if (pm10 < 60) {
                 outColor.switchTo(Color.GREEN);
-            } else if (pm10 < 200) {
+            } else if (pm10 < 150) {
                 outColor.switchTo(Color.YELLOW);
             } else {
                 outColor.switchTo(Color.RED);
