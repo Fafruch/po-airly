@@ -41,6 +41,8 @@ public class UserInput {
             parser.printUsage(System.out);
             System.out.println();
             System.out.println("  Example: java Main --latitude=VAL --longitude=VAL --history --api-key=VAL");
+
+            throw new InputException("");
         }
     }
 
