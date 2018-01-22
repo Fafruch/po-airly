@@ -6,14 +6,14 @@ import java.net.URL;
 
 public class RequestHandler {
     public String get(String userUrl, String apiKey) throws IOException {
-        return responseFor(createConnection(userUrl, apiKey));
+        return responseFor(createConnection("GET", userUrl, apiKey));
     }
 
-    private HttpURLConnection createConnection(String userUrl, String apiKey) throws IOException {
+    private HttpURLConnection createConnection(String method, String userUrl, String apiKey) throws IOException {
         URL url = new URL(userUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-        connection.setRequestMethod("GET");
+        connection.setRequestMethod(method);
         connection.setRequestProperty("Accept", "application/json");
         connection.setRequestProperty("apikey", apiKey);
 
