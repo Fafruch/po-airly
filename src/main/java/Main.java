@@ -13,8 +13,9 @@ public class Main {
 
             Data data = getData(userInput);
 
-            Printer printer = new Printer(data, userInput.history);
-            printer.printInfo();
+            Printer printer = new Printer(data, userInput);
+            printer.printData();
+
         } catch (JsonSyntaxException | ParseException ex) {
             System.out.println("Received illegal response from Airly server. Please try again.");
         } catch (UnknownHostException ex) {

@@ -6,6 +6,10 @@ import java.net.URL;
 
 public class RequestHandler {
     public String get(String userUrl, String apiKey) throws IOException {
+        return responseFor(createConnection(userUrl, apiKey));
+    }
+
+    private HttpURLConnection createConnection(String userUrl, String apiKey) throws IOException {
         URL url = new URL(userUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -13,7 +17,7 @@ public class RequestHandler {
         connection.setRequestProperty("Accept", "application/json");
         connection.setRequestProperty("apikey", apiKey);
 
-        return responseFor(connection);
+        return connection;
     }
 
     private String responseFor(HttpURLConnection connection) throws IOException {
@@ -22,7 +26,6 @@ public class RequestHandler {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-            // System.out.println(line);
             response.append(line);
         }
 
