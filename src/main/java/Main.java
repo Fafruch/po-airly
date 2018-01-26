@@ -1,4 +1,3 @@
-import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
@@ -11,7 +10,8 @@ public class Main {
             UserInput userInput = new UserInput(args);
             userInput.parse();
 
-            Data data = getData(userInput);
+            Fetcher fetcher = new Fetcher();
+            Data data = fetcher.getData(userInput);
 
             Printer printer = new Printer(data, userInput);
             printer.printData();
@@ -37,26 +37,5 @@ public class Main {
                 System.out.println(ex.getMessage());
             }
         }
-    }
-
-    private static Data getData(UserInput userInput) throws Exception {
-        RequestHandler requestHandler = new RequestHandler();
-        Gson gson = new Gson();
-        Data data;
-
-        if (userInput.sensorId != null) {
-            String sensorIdUrl = "https://airapi.airly.eu/v1/sensor/measurements?sensorId=" + userInput.sensorId;
-            String response = requestHandler.get(sensorIdUrl, userInput.apiKey);
-
-            data = gson.fromJson(response, Data.class);
-
-        } else {
-            String mapPointUrl = "https://airapi.airly.eu/v1/mapPoint/measurements?latitude=" + userInput.latitude + "&longitude=" + userInput.longitude;
-            String response = requestHandler.get(mapPointUrl, userInput.apiKey);
-
-            data = gson.fromJson(response, Data.class);
-        }
-
-        return data;
     }
 }
