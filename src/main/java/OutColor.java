@@ -1,12 +1,12 @@
 public class OutColor {
-    private final String redSwitch = (char)27 + "[31m";
-    private final String greenSwitch = (char)27 + "[32m";
-    private final String yellowSwitch = (char)27 + "[33m";
-    private final String blueSwitch = (char)27 + "[34m";
-    private final String greySwitch = (char)27 + "[37m";
-    private final String whiteSwitch = (char)27 + "[38m";
+    private static final String redSwitch = (char)27 + "[31m";
+    private static final String greenSwitch = (char)27 + "[32m";
+    private static final String yellowSwitch = (char)27 + "[33m";
+    private static final String blueSwitch = (char)27 + "[34m";
+    private static final String greySwitch = (char)27 + "[37m";
+    private static final String whiteSwitch = (char)27 + "[39m";
 
-    public void switchTo(Color color) {
+    public static void switchTo(Color color) {
         switch(color) {
             case RED: System.out.print(redSwitch);
                 break;
