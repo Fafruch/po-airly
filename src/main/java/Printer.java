@@ -7,17 +7,21 @@ import java.util.GregorianCalendar;
 
 public class Printer {
     private Data data;
-    private boolean history;
+    private boolean showHistory;
+    private boolean showPercent;
+    int pm25Norm = 25;
+    int pm10Norm = 50;
 
     public Printer (Data data, UserInput userInput) {
         this.data = data;
-        this.history = userInput.history;
+        this.showHistory = userInput.history;
+        this.showPercent = userInput.percent;
     }
 
     public void printData() throws ParseException {
         printCurrentInfo();
 
-        if(history) {
+        if(showHistory) {
             printHistoryInfo();
         }
     }
@@ -165,10 +169,17 @@ public class Printer {
                 OutColor.switchTo(Color.RED);
             }
 
-            System.out.print(Round.to(2, measurements.pm25));
-            OutColor.switchTo(Color.WHITE);
+            if (showPercent) {
+                System.out.print((int)((measurements.pm25 / pm25Norm) * 100));
+                System.out.println(" %");
 
-            System.out.println(" μg/m^3");
+                OutColor.switchTo(Color.WHITE);
+            } else {
+                System.out.print(Round.to(2, measurements.pm25));
+                OutColor.switchTo(Color.WHITE);
+
+                System.out.println(" μg/m^3");
+            }
         }
     }
 
@@ -190,10 +201,17 @@ public class Printer {
                 OutColor.switchTo(Color.RED);
             }
 
-            System.out.print(Round.to(2, measurements.pm10));
-            OutColor.switchTo(Color.WHITE);
+            if (showPercent) {
+                System.out.print((int)((measurements.pm10 / pm10Norm) * 100));
+                System.out.println(" %");
 
-            System.out.println(" μg/m^3");
+                OutColor.switchTo(Color.WHITE);
+            } else {
+                System.out.print(Round.to(2, measurements.pm10));
+                OutColor.switchTo(Color.WHITE);
+
+                System.out.println(" μg/m^3");
+            }
         }
         OutColor.switchTo(Color.WHITE);
     }
