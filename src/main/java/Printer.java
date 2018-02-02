@@ -56,7 +56,7 @@ public class Printer {
 
         for (int i = data.history.length - 1; i >= 0; i--) {
             System.out.println("-----------------------------------");
-            System.out.println("|         " + getFormattedTimeFor(data.history[i].tillDateTime) + " - " + getFormattedTimeFor(data.history[i].fromDateTime) + "           |");
+            System.out.println("|         " + getFormattedTimeFor(data.history[i].fromDateTime) + " - " + getFormattedTimeFor(data.history[i].tillDateTime) + "           |");
             System.out.println("-----------------------------------");
             System.out.println();
             printHistoryMeasurements(data.history[i].measurements);
