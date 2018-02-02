@@ -106,12 +106,12 @@ public class Printer {
             OutColor.switchTo(Color.WHITE);
 
         } else {
-            if (measurements.aqi < 30) {
+            if (measurements.aqi < 25) {
                 OutColor.switchTo(Color.BLUE);
                 fafbot.happy();
                 OutColor.switchTo(Color.WHITE);
 
-            } else if (measurements.aqi < 60) {
+            } else if (measurements.aqi < 50) {
                 OutColor.switchTo(Color.GREEN);
                 fafbot.satisfied();
                 OutColor.switchTo(Color.WHITE);
@@ -136,9 +136,9 @@ public class Printer {
             System.out.println("no data");
             OutColor.switchTo(Color.WHITE);
         } else {
-            if (measurements.aqi < 30) {
+            if (measurements.aqi < 25) {
                 OutColor.switchTo(Color.BLUE);
-            } else if (measurements.aqi < 60) {
+            } else if (measurements.aqi < 50) {
                 OutColor.switchTo(Color.GREEN);
             } else if (measurements.aqi < 100) {
                 OutColor.switchTo(Color.YELLOW);
@@ -159,11 +159,11 @@ public class Printer {
             OutColor.switchTo(Color.WHITE);
 
         } else {
-            if (measurements.pm25 < 15) {
+            if (measurements.pm25 < 13) {
                 OutColor.switchTo(Color.BLUE);
-            } else if (measurements.pm25 < 40) {
+            } else if (measurements.pm25 < 25) {
                 OutColor.switchTo(Color.GREEN);
-            } else if (measurements.pm25 < 90) {
+            } else if (measurements.pm25 < 75) {
                 OutColor.switchTo(Color.YELLOW);
             } else {
                 OutColor.switchTo(Color.RED);
@@ -191,9 +191,9 @@ public class Printer {
             OutColor.switchTo(Color.WHITE);
 
         } else {
-            if (measurements.pm10 < 30) {
+            if (measurements.pm10 < 25) {
                 OutColor.switchTo(Color.BLUE);
-            } else if (measurements.pm10 < 60) {
+            } else if (measurements.pm10 < 50) {
                 OutColor.switchTo(Color.GREEN);
             } else if (measurements.pm10 < 150) {
                 OutColor.switchTo(Color.YELLOW);
