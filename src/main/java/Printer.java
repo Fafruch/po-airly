@@ -7,17 +7,21 @@ import java.util.GregorianCalendar;
 
 public class Printer {
     private Data data;
-    private boolean history;
+    private boolean showHistory;
+    private boolean showPercent;
+    int pm25Norm = 25;
+    int pm10Norm = 50;
 
     public Printer (Data data, UserInput userInput) {
         this.data = data;
-        this.history = userInput.history;
+        this.showHistory = userInput.history;
+        this.showPercent = userInput.percent;
     }
 
     public void printData() throws ParseException {
         printCurrentInfo();
 
-        if(history) {
+        if(showHistory) {
             printHistoryInfo();
         }
     }
@@ -35,14 +39,12 @@ public class Printer {
     }
 
     private void printMeasurements() {
-        OutColor outColor = new OutColor();
-
         if(data.measurements != null) {
             printMeasurementsInfo(data.measurements);
         } else {
-            outColor.switchTo(Color.GREY);
+            OutColor.switchTo(Color.GREY);
             System.out.println("no data :(");
-            outColor.switchTo(Color.WHITE);
+            OutColor.switchTo(Color.WHITE);
         }
     }
 
@@ -58,7 +60,7 @@ public class Printer {
 
         for (int i = data.history.length - 1; i >= 0; i--) {
             System.out.println("-----------------------------------");
-            System.out.println("|         " + getFormattedTimeFor(data.history[i].tillDateTime) + " - " + getFormattedTimeFor(data.history[i].fromDateTime) + "           |");
+            System.out.println("|         " + getFormattedTimeFor(data.history[i].fromDateTime) + " - " + getFormattedTimeFor(data.history[i].tillDateTime) + "           |");
             System.out.println("-----------------------------------");
             System.out.println();
             printHistoryMeasurements(data.history[i].measurements);
@@ -67,14 +69,12 @@ public class Printer {
     }
 
     private void printHistoryMeasurements(Measurements measurements) {
-        OutColor outColor = new OutColor();
-
         if (measurements != null) {
             printMeasurementsInfo(measurements);
         } else {
-            outColor.switchTo(Color.GREY);
+            OutColor.switchTo(Color.GREY);
             System.out.println("no data for this time range :(");
-            outColor.switchTo(Color.WHITE);
+            OutColor.switchTo(Color.WHITE);
         }
     }
 
@@ -101,133 +101,149 @@ public class Printer {
         Fafbot fafbot = new Fafbot();
 
         if (measurements.aqi == null) {
+            OutColor.switchTo(Color.GREY);
             fafbot.confused();
+            OutColor.switchTo(Color.WHITE);
+
         } else {
-            if (measurements.aqi < 30) {
+            if (measurements.aqi < 25) {
+                OutColor.switchTo(Color.BLUE);
                 fafbot.happy();
-            } else if (measurements.aqi < 60) {
+                OutColor.switchTo(Color.WHITE);
+
+            } else if (measurements.aqi < 50) {
+                OutColor.switchTo(Color.GREEN);
                 fafbot.satisfied();
+                OutColor.switchTo(Color.WHITE);
+
             } else if (measurements.aqi < 100) {
+                OutColor.switchTo(Color.YELLOW);
                 fafbot.joyless();
+                OutColor.switchTo(Color.WHITE);
+
             } else {
+                OutColor.switchTo(Color.RED);
                 fafbot.dying();
+                OutColor.switchTo(Color.WHITE);
             }
         }
     }
 
     private void printAqi(Measurements measurements) {
-        OutColor outColor = new OutColor();
-
         System.out.print("AQI:         ");
         if (measurements.aqi == null) {
-            outColor.switchTo(Color.GREY);
+            OutColor.switchTo(Color.GREY);
             System.out.println("no data");
-            outColor.switchTo(Color.WHITE);
+            OutColor.switchTo(Color.WHITE);
         } else {
-            if (measurements.aqi < 30) {
-                outColor.switchTo(Color.BLUE);
-            } else if (measurements.aqi < 60) {
-                outColor.switchTo(Color.GREEN);
+            if (measurements.aqi < 25) {
+                OutColor.switchTo(Color.BLUE);
+            } else if (measurements.aqi < 50) {
+                OutColor.switchTo(Color.GREEN);
             } else if (measurements.aqi < 100) {
-                outColor.switchTo(Color.YELLOW);
+                OutColor.switchTo(Color.YELLOW);
             } else {
-                outColor.switchTo(Color.RED);
+                OutColor.switchTo(Color.RED);
             }
 
             System.out.println(Round.to(2, measurements.aqi));
-            outColor.switchTo(Color.WHITE);
+            OutColor.switchTo(Color.WHITE);
         }
     }
 
     private void printPm25(Measurements measurements) {
-        OutColor outColor = new OutColor();
-
         System.out.print("PM 2,5:      ");
         if (measurements.pm25 == null) {
-            outColor.switchTo(Color.GREY);
+            OutColor.switchTo(Color.GREY);
             System.out.println("no data");
-            outColor.switchTo(Color.WHITE);
+            OutColor.switchTo(Color.WHITE);
 
         } else {
-            if (measurements.pm25 < 15) {
-                outColor.switchTo(Color.BLUE);
-            } else if (measurements.pm25 < 40) {
-                outColor.switchTo(Color.GREEN);
-            } else if (measurements.pm25 < 90) {
-                outColor.switchTo(Color.YELLOW);
+            if (measurements.pm25 < 13) {
+                OutColor.switchTo(Color.BLUE);
+            } else if (measurements.pm25 < 25) {
+                OutColor.switchTo(Color.GREEN);
+            } else if (measurements.pm25 < 75) {
+                OutColor.switchTo(Color.YELLOW);
             } else {
-                outColor.switchTo(Color.RED);
+                OutColor.switchTo(Color.RED);
             }
 
-            System.out.print(Round.to(2, measurements.pm25));
-            outColor.switchTo(Color.WHITE);
+            if (showPercent) {
+                System.out.print((int)((measurements.pm25 / pm25Norm) * 100));
+                System.out.println(" %");
 
-            System.out.println(" μg/m^3");
+                OutColor.switchTo(Color.WHITE);
+            } else {
+                System.out.print(Round.to(2, measurements.pm25));
+                OutColor.switchTo(Color.WHITE);
+
+                System.out.println(" μg/m^3");
+            }
         }
     }
 
     private void printPm10(Measurements measurements) {
-        OutColor outColor = new OutColor();
-
         System.out.print("PM 10:       ");
         if (measurements.pm10 == null) {
-            outColor.switchTo(Color.GREY);
+            OutColor.switchTo(Color.GREY);
             System.out.println("no data");
-            outColor.switchTo(Color.WHITE);
+            OutColor.switchTo(Color.WHITE);
 
         } else {
-            if (measurements.pm10 < 30) {
-                outColor.switchTo(Color.BLUE);
-            } else if (measurements.pm10 < 60) {
-                outColor.switchTo(Color.GREEN);
+            if (measurements.pm10 < 25) {
+                OutColor.switchTo(Color.BLUE);
+            } else if (measurements.pm10 < 50) {
+                OutColor.switchTo(Color.GREEN);
             } else if (measurements.pm10 < 150) {
-                outColor.switchTo(Color.YELLOW);
+                OutColor.switchTo(Color.YELLOW);
             } else {
-                outColor.switchTo(Color.RED);
+                OutColor.switchTo(Color.RED);
             }
 
-            System.out.print(Round.to(2, measurements.pm10));
-            outColor.switchTo(Color.WHITE);
+            if (showPercent) {
+                System.out.print((int)((measurements.pm10 / pm10Norm) * 100));
+                System.out.println(" %");
 
-            System.out.println(" μg/m^3");
+                OutColor.switchTo(Color.WHITE);
+            } else {
+                System.out.print(Round.to(2, measurements.pm10));
+                OutColor.switchTo(Color.WHITE);
+
+                System.out.println(" μg/m^3");
+            }
         }
-        outColor.switchTo(Color.WHITE);
+        OutColor.switchTo(Color.WHITE);
     }
 
     private void printPressure(Measurements measurements) {
-        OutColor outColor = new OutColor();
-
         System.out.print("Pressure:    ");
         if (measurements.pressure == null) {
-            outColor.switchTo(Color.GREY);
+            OutColor.switchTo(Color.GREY);
             System.out.println("no data");
-            outColor.switchTo(Color.WHITE);
+            OutColor.switchTo(Color.WHITE);
         } else {
             System.out.println(Round.to(2, measurements.pressure / 100) + " hPa");
         }
     }
 
     private void printHumidity(Measurements measurements) {
-        OutColor outColor = new OutColor();
-
         System.out.print("Humidity:    ");
         if (measurements.humidity == null) {
-            outColor.switchTo(Color.GREY);
+            OutColor.switchTo(Color.GREY);
             System.out.println("no data");
-            outColor.switchTo(Color.WHITE);
+            OutColor.switchTo(Color.WHITE);
         } else {
             System.out.println(Round.to(2, measurements.humidity) + " %");
         }
     }
 
     private void printTemperature(Measurements measurements) {
-        OutColor outColor = new OutColor();
-
         System.out.print("Temperature: ");
         if (measurements.temperature == null) {
-            outColor.switchTo(Color.GREY);
+            OutColor.switchTo(Color.GREY);
             System.out.println("no data");
-            outColor.switchTo(Color.WHITE);
+            OutColor.switchTo(Color.WHITE);
         } else {
             System.out.println(Round.to(2, measurements.temperature) + "\u00b0" + "C");
         }

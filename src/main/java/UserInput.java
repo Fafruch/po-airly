@@ -20,6 +20,9 @@ public class UserInput {
     @Option(name = "--history", usage = "(optional) Get historical data (from 24 hours every hour)")
     public boolean history;
 
+    @Option(name = "--percent", usage = "(optional) Show PM values relative to norms (with %)")
+    public boolean percent;
+
     public UserInput(String[] args) {
         this.args = args;
     }
